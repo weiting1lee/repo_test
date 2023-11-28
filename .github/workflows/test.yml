@@ -1,0 +1,14 @@
+name: install sqlite
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: moving current directory
+      run: cd workdir/sqlite-src-3420000/
+    - name: install sqlite
+      run: make install
