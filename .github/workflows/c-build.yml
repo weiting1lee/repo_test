@@ -1,0 +1,15 @@
+name: C Build and Test
+
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the C code
+      run: gcc -o hello-world hello-world.c
+    - name: Test the C code
+      run: ./hello-world
