@@ -7,14 +7,8 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v2
-    - name: rename runner
+    - name: docker hello world
       run: |
-        cd /home/ubuntu
         ls
         pwd
-    - name: install sqlite
-      run: |
-        cd workdir/sqlite-src-3420000
-        ls
-        pwd
+        docker run hello-world
