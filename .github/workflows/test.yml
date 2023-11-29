@@ -10,4 +10,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: install sqlite
       run: 
-        cd workdir/sqlite-src-3420000 && ls && make install
+        cd workdir/sqlite-src-3420000 && ls && pwd && make install
