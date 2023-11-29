@@ -10,5 +10,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: moving current directory
       run: cd workdir/sqlite-src-3420000/
+    - name: list segments
+      run: ls
     - name: install sqlite
       run: sudo make install
