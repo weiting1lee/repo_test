@@ -8,9 +8,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: moving current directory and list segments
-      run: 
-        cd workdir/sqlite-src-34200000
-        ls
     - name: install sqlite
-      run: sudo make install
+      run: 
+        cd workdir/sqlite-src-34200000 && ls && make install
