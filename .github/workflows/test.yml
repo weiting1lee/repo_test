@@ -1,4 +1,4 @@
-name: install sqlite
+name: docker test
 
 on:
   workflow_dispatch:
@@ -12,3 +12,6 @@ jobs:
         ls
         pwd
         docker run hello-world
+    - name: docker images 
+      run: 
+        docker images
