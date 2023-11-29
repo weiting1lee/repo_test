@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install sqlite
-      run: 
+      run: |
         cd workdir/sqlite-src-3420000
         ls
         pwd
