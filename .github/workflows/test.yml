@@ -11,4 +11,4 @@ jobs:
     - name: moving current directory
       run: cd workdir/sqlite-src-3420000/
     - name: install sqlite
-      run: make install
+      run: sudo make install
