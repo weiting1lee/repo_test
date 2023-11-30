@@ -8,3 +8,5 @@ WORKDIR /src
 
 # Prepare the environment
 RUN pwd
+
+USER postgres
