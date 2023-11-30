@@ -2,11 +2,11 @@ name: CI
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-      - main
-  pull_request:
+  #push:
+  #  branches:
+  #    - master
+  #    - main
+  #pull_request:
   
 jobs:
   test:
@@ -23,7 +23,7 @@ jobs:
       - run: |
           pwd
           ls
-      - run: docker build -t parquet_fdw --build-arg PG_MAJOR=${{ matrix.pg }} .
-      - run: docker run --rm parquet_fdw
+      - run: docker build -t fdw_test --build-arg PG_MAJOR=${{ matrix.pg }} .
+      - run: docker run --rm fdw_test
         env:
           CCFLAGS: ${{ matrix.ccflags }}
