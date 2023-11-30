@@ -7,6 +7,7 @@ COPY . /src
 WORKDIR /src
 
 # Prepare the environment
-RUN pwd
+RUN pwd && \
+  ls
 
 USER postgres
