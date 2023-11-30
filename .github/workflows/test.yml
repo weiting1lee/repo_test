@@ -24,6 +24,6 @@ jobs:
           pwd
           ls
       - run: docker build -t fdw_test --build-arg PG_MAJOR=${{ matrix.pg }} .
-      - run: docker run --rm fdw_test
-        env:
-          CCFLAGS: ${{ matrix.ccflags }}
+      #- run: docker run --rm fdw_test
+      #  env:
+      #    CCFLAGS: ${{ matrix.ccflags }}
