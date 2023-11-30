@@ -3,8 +3,8 @@ FROM postgres:${PG_MAJOR}-bullseye
 
 ENV PGDATA=/pgdata
 
-#COPY . /src
-#WORKDIR /src
+#COPY . /workdir
+WORKDIR /
 
 # Prepare the environment
 RUN pwd && \
