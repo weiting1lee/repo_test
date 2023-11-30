@@ -11,3 +11,6 @@ RUN pwd && \
   ls
 
 USER postgres
+
+ENTRYPOINT pwd && \
+  ls
