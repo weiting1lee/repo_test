@@ -1,4 +1,4 @@
-=ARG PG_MAJOR
+ARG PG_MAJOR
 FROM postgres:${PG_MAJOR}-bullseye
 
 ENV LANG=C.UTF-8 PGDATA=/pgdata
