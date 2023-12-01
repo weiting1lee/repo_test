@@ -39,7 +39,7 @@ jobs:
           cd sqlite-src-3420000
           ./configure --enable-fts5
           make
-          make install
+          sudo make install
         
       - name: build sqlite_fdw
         run: |
