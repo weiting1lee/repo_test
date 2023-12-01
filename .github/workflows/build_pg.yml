@@ -1,0 +1,36 @@
+name: CI_prev
+
+on:
+  workflow_dispatch:
+  #push:
+  #  branches:
+  #    - master
+  #    - main
+  #pull_request:
+  
+jobs:
+  test:
+    strategy:
+      fail-fast: True
+      matrix:
+        pg: [16]
+        ccflags: ['']
+        
+    name: download PostgreSQL ${{ matrix.pg }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir ~/workdir
+          cd ~/workdir
+          curl -O https://ftp.postgresql.org/pub/source/v16.0/postgresql-16.0.tar.bz2
+          tar xjf postgresql-16.0.tar.bz2
+          cd postgresql-16.0
+          ./configure --prefix ~/workdir/db
+          make
+
+          
+      #- run: docker build -t fdw_test --build-arg PG_MAJOR=${{ matrix.pg }} .
+      #- run: docker run --rm fdw_test
+      #  env:
+      #    CCFLAGS: ${{ matrix.ccflags }}
