@@ -11,7 +11,7 @@ on:
 jobs:
   test:
     strategy:
-      fail-fast: True
+      fail-fast: false
       matrix:
         pg: [16,15,14,13,12]
         ccflags: ['']
