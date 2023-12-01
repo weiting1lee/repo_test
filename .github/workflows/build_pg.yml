@@ -31,3 +31,36 @@ jobs:
           sudo apt-get update
           sudo apt-get install language-pack-bg-base language-pack-bg
           sudo locale-gen bg_BG
+      - name: download and build PostgreSQL ${{ matrix.pg }}
+        run: |
+          mkdir ~/workdir
+          cd ~/workdir
+          curl -O https://ftp.postgresql.org/pub/source/v${{ matrix.pg }}.0/postgresql-${{ matrix.pg }}.0.tar.bz2
+          tar xjf postgresql-${{ matrix.pg }}.0.tar.bz2
+          cd postgresql-${{ matrix.pg }}.0
+          ./configure --prefix ~/workdir/db
+          make
+      - name: install SQLite
+        run: |
+          mkdir ~/workdir
+          cd ~/workdir
+          wget https://www.sqlite.org/2023/sqlite-src-3420000.zip
+          unzip sqlite-src-3420000.zip
+          pwd
+          ls -l
+          cd sqlite-src-3420000
+          ./configure --enable-fts5
+          make
+          sudo make install
+      - name: build sqlite_fdw
+        run: |
+          cd ~/workdir/postgresql-16.0/contrib
+          git clone https://github.com/pgspider/sqlite_fdw.git
+          cd sqlite_fdw
+          export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
+          make
+
+      - name: execute sqlite_fdw test
+        run: |
+          cd ~/workdir/postgresql-${{ matrix.pg }}.0/contrib/sqlite_fdw
+          ./test.sh
