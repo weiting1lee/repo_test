@@ -17,7 +17,7 @@ jobs:
         ccflags: ['']
         
     name: test_PostgreSQL ${{ matrix.pg }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: install SQLite
@@ -26,9 +26,7 @@ jobs:
           cd ~/workdir
           wget https://www.sqlite.org/2023/sqlite-src-3420000.zip
           unzip sqlite-src-3420000.zip
-          pwd
-          ls
-          cd sqlite-src-3420000
+          cd sqlite-src-3420000/
           ./configure --enable-fts5
           make
           make install
