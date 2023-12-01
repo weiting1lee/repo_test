@@ -31,7 +31,7 @@ jobs:
           cd sqlite-src-3420000
           ./configure --enable-fts5
           make
-          make install
+          sudo make install
       
       #- run: docker build -t fdw_test --build-arg PG_MAJOR=${{ matrix.pg }} .
       #- run: docker run --rm fdw_test
