@@ -28,7 +28,7 @@ jobs:
           unzip sqlite-src-3420000.zip
           pwd
           ls -l
-          cd sqlite-src-3420000
+          cd sqlite-src-3420000
           ./configure --enable-fts5
           make
           make install
