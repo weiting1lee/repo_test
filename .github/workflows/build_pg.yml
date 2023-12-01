@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: download and build PostgreSQL ${{ matrix.pg }}
-      - run: |
+        run: |
           mkdir ~/workdir
           cd ~/workdir
           curl -O https://ftp.postgresql.org/pub/source/v${{ matrix.pg }}.0/postgresql-${{ matrix.pg }}.0.tar.bz2
@@ -30,11 +30,11 @@ jobs:
           ./configure --prefix ~/workdir/db
           make
       - name: confirm directory
-      - run: |
+        run: |
           pwd
           ls
       - name: install SQLite
-      - run: |
+        run: |
           cd ~/workdir
           wget https://www.sqlite.org/2023/sqlite-src-3420000.zip
           unzip sqlite-src-3420000.zip
