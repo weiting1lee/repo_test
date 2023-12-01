@@ -20,17 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: download and build PostgreSQL ${{ matrix.pg }}
-        run: |
-          mkdir ~/workdir
-          cd ~/workdir
-          curl -O https://ftp.postgresql.org/pub/source/v${{ matrix.pg }}.0/postgresql-${{ matrix.pg }}.0.tar.bz2
-          tar xjf postgresql-${{ matrix.pg }}.0.tar.bz2
-          cd postgresql-${{ matrix.pg }}.0
-          ./configure --prefix ~/workdir/db
-          make
       - name: install SQLite
         run: |
+          mkdir ~/workdir
           cd ~/workdir
           wget https://www.sqlite.org/2023/sqlite-src-3420000.zip
           unzip sqlite-src-3420000.zip
