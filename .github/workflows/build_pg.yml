@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: True
       matrix:
-        pg: [16]
+        pg: [16,15,14,13,12]
         ccflags: ['']
         
     name: test_PostgreSQL ${{ matrix.pg }}
