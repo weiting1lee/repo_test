@@ -20,6 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: download and build PostgreSQL ${{ matrix.pg }}
+        run: |
+          mkdir ~/workdir
+          cd ~/workdir
+          curl -O https://ftp.postgresql.org/pub/source/v${{ matrix.pg }}.0/postgresql-${{ matrix.pg }}.0.tar.bz2
+          tar xjf postgresql-${{ matrix.pg }}.0.tar.bz2
+          cd postgresql-${{ matrix.pg }}.0
+          ./configure --prefix ~/workdir/db
+          make
       - name: install SQLite
         run: |
           mkdir ~/workdir
@@ -31,9 +40,17 @@ jobs:
           cd sqlite-src-3420000
           ./configure --enable-fts5
           make
-          sudo make install
-      
-      #- run: docker build -t fdw_test --build-arg PG_MAJOR=${{ matrix.pg }} .
-      #- run: docker run --rm fdw_test
-      #  env:
-      #    CCFLAGS: ${{ matrix.ccflags }}
+          make install
+        
+      - name: build sqlite_fdw
+        run: |
+          cd ~/workdir/postgresql-16.0/contrib
+          git clone https://github.com/pgspider/sqlite_fdw.git
+          cd sqlite_fdw
+          export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
+          make
+
+      - name: execute sqlite_fdw test
+        run: |
+          cd ~/workdir/postgresql-${{ matrix.pg }}.0/contrib/sqlite_fdw
+          ./test.sh
