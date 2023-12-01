@@ -42,7 +42,6 @@ jobs:
           make
       - name: install SQLite
         run: |
-          mkdir ~/workdir
           cd ~/workdir
           wget https://www.sqlite.org/2023/sqlite-src-3420000.zip
           unzip sqlite-src-3420000.zip
