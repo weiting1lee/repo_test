@@ -24,13 +24,7 @@ jobs:
           bash install_locales.sh
       - name: download and build PostgreSQL ${{ matrix.pg }}
         run: |
-          mkdir ~/workdir
-          cd ~/workdir
-          curl -O https://ftp.postgresql.org/pub/source/v${{ matrix.pg }}/postgresql-${{ matrix.pg }}.tar.bz2
-          tar xjf postgresql-${{ matrix.pg }}.tar.bz2
-          cd postgresql-${{ matrix.pg }}
-          ./configure --prefix ~/workdir/db
-          make
+          bash download_build_postgres.sh ${{ matrix.pg }}
       - name: install SQLite
         run: |
           cd ~/workdir
