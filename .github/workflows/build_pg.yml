@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pg: [16,15,14,13,12]
+        pg: [16.0,15.3,14.8,13.11,12.15]
         ccflags: ['']
         
     name: test_PostgreSQL ${{ matrix.pg }}
@@ -35,9 +35,9 @@ jobs:
         run: |
           mkdir ~/workdir
           cd ~/workdir
-          curl -O https://ftp.postgresql.org/pub/source/v${{ matrix.pg }}.0/postgresql-${{ matrix.pg }}.0.tar.bz2
-          tar xjf postgresql-${{ matrix.pg }}.0.tar.bz2
-          cd postgresql-${{ matrix.pg }}.0
+          curl -O https://ftp.postgresql.org/pub/source/v${{ matrix.pg }}/postgresql-${{ matrix.pg }}.tar.bz2
+          tar xjf postgresql-${{ matrix.pg }}.tar.bz2
+          cd postgresql-${{ matrix.pg }}
           ./configure --prefix ~/workdir/db
           make
       - name: install SQLite
@@ -53,7 +53,7 @@ jobs:
           sudo make install
       - name: build sqlite_fdw
         run: |
-          cd ~/workdir/postgresql-${{ matrix.pg }}.0/contrib
+          cd ~/workdir/postgresql-${{ matrix.pg }}/contrib
           git clone https://github.com/pgspider/sqlite_fdw.git
           cd sqlite_fdw
           export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
@@ -61,5 +61,5 @@ jobs:
 
       - name: execute sqlite_fdw test
         run: |
-          cd ~/workdir/postgresql-${{ matrix.pg }}.0/contrib/sqlite_fdw
+          cd ~/workdir/postgresql-${{ matrix.pg }}/contrib/sqlite_fdw
           ./test.sh
