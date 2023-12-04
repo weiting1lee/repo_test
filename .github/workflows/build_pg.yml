@@ -8,8 +8,11 @@ on:
   #    - main
   #pull_request:
   
+  
 jobs:
   test:
+    env:
+      SQLITE_VERSION : "342000"
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +30,7 @@ jobs:
         run: bash download_build_postgres.sh ${{ matrix.pg }}
       
       - name: install SQLite
-        run: bash install_sqlite.sh 3420000
+        run: bash install_sqlite.sh ${{ env.SQLITE_VERSION }}
       
       - name: build sqlite_fdw
         run: bash build_sqlite_fdw.sh ${{ matrix.pg }}
