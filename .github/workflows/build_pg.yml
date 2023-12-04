@@ -19,32 +19,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
       - name: install locales
-        run: |
-          bash install_locales.sh
+        run: bash install_locales.sh
+      
       - name: download and build PostgreSQL ${{ matrix.pg }}
-        run: |
-          bash download_build_postgres.sh ${{ matrix.pg }}
+        run: bash download_build_postgres.sh ${{ matrix.pg }}
+      
       - name: install SQLite
-        run: |
-          cd ~/workdir
-          wget https://www.sqlite.org/2023/sqlite-src-3420000.zip
-          unzip sqlite-src-3420000.zip
-          pwd
-          ls -l
-          cd sqlite-src-3420000
-          ./configure --enable-fts5
-          make
-          sudo make install
+        run: bash install_sqlite.sh 3420000
+      
       - name: build sqlite_fdw
-        run: |
-          cd ~/workdir/postgresql-${{ matrix.pg }}/contrib
-          git clone https://github.com/pgspider/sqlite_fdw.git
-          cd sqlite_fdw
-          export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
-          make
-
+        run: bash build_sqlite_fdw.sh ${{ matrix.pg }}
+      
       - name: execute sqlite_fdw test
-        run: |
-          cd ~/workdir/postgresql-${{ matrix.pg }}/contrib/sqlite_fdw
-          ./test.sh
+        run: bash execute_test.sh ${{ matrix.pg }}
