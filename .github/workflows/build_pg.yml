@@ -12,7 +12,7 @@ on:
 jobs:
   test:
     env:
-      SQLITE_VERSION : "342000"
+      SQLITE_VERSION : "3420000"
     strategy:
       fail-fast: false
       matrix:
