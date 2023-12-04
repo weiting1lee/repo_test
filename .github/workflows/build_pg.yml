@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: install locales
         run: |
-          bash hello.sh
+          bash install_locales.sh
       - name: download and build PostgreSQL ${{ matrix.pg }}
         run: |
           mkdir ~/workdir
